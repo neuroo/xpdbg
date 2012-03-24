@@ -3,15 +3,18 @@
 ## Explanation of XPDBG
 
 This runtime analysis toolkit is divided in 3 components:
+
 * the tracer on the server-side
 * the trace aggregator and modeler (client-side)
 * the trace visualizer (client-side)
 
 The server-side component is very raw:
+
 * Using Xdebug for PHP (with provided configuration)
 * Spits out the traces in one file (location to provide by the user)
 
 The trace aggregator performs the following actions:
+
 * Connects in SSH to the server, and tails the trace file
 * It queries the SQLite database of taint names. In this context, taints are essentially
   needles that need to be followed and trace in the entire application
@@ -20,27 +23,27 @@ The trace aggregator performs the following actions:
   taints (or needles)
 
 The trace visualizer:
+
 * Browser based visualization
 * Only works on Firefox/Opera/IE (sorry, no Chrome)
 * Loads the local JSON file every N seconds, and displays interesting trace
-* Traces are displayed in two locations:
- ** partial traces in the main view
- ** actual xdebug trace is also dumped
-
+* Main trace slice (with sink/source node highlight) are displayed in the main view, and the full trace is available
 
 ## Executing XPDBG
 
 
 Example of command line:
+
 	$ xpdbg.py --host foobar.example.com 
-	         --username dummy 
-	         --remote /tmp/xdebug/trace.2043925204.xt
+	           --username dummy 
+	           --remote /tmp/xdebug/trace.2043925204.xt
 
 Options:
-  * host: server to connect using SSH
-  * username: username to use for SSH connection (pwd to be prompted)
-  * remote: remote location (on the server) of the trace file
-  * The rest are in the source... 
+
+- host: server to connect using SSH
+- username: username to use for SSH connection (pwd to be prompted)
+- remote: remote location (on the server) of the trace file
+- The rest are in the source... 
 
 
 ## Setting up Xdebug
@@ -85,9 +88,12 @@ Please refer to the Xdebug documentation if any issues with Xdebug deployment
 
 The distributed version of Xpdbg is quite old (developed in 2009). However, it should work
 just fine with the current version of the following dependencies:
- * python-graph   http://code.google.com/p/python-graph
- * twisted        http://twistedmatrix.com
- * pygments       http://pygments.org
+
+ * [python-graph](http://code.google.com/p/python-graph)
+ * [twisted](http://twistedmatrix.com)
+ * [pygments](http://pygments.org)
+
+Xpdbg has been tested in Python 2.6 and 2.7
 
 
 
